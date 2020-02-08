@@ -1,0 +1,25 @@
+Como necesito extraer datos de la web sobre la emisión dióxido de nitrógeno semanal. Generaré ficheros diarios con los datos de dióxido de nitrógeno
+durante 7 días, una vez obtenido los datos semanales, graficaré la media de emisiones.
+
+Voy a programar una carga diaria.
+import schedule
+import datetime
+import time
+
+# Obtain current time
+start = datetime.datetime.now()
+
+# Simple callable for example
+class DummyClock:
+  def __call__(self):
+    print datetime.datetime.now()
+
+schedule.every(1).seconds.do(DummyClock())
+
+while True:
+    schedule.run_pending()
+    # 5 minutes == 300 seconds
+    if (datetime.datetime.now() - start).seconds >= 300:
+        break
+    # And here we halt execution for a second
+    time.sleep(1)
